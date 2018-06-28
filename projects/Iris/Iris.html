@@ -11783,7 +11783,8 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>Using <a href="https://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> on <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Iris Dataset</a> we will classify the flowers into 3 classes.</p>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>In machine learning, support vector machines (SVMs, also support vector networks[1]) are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis. Given a set of training examples, each marked as belonging to one or the other of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting).
+Using <a href="https://en.wikipedia.org/wiki/Support_vector_machine">SVM</a> on <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Iris Dataset</a> we will classify the flowers into 3 classes.</p>
 <blockquote><p><strong>Note:</strong> Code and Markdown cells can be executed using the <strong>Shift + Enter</strong> keyboard shortcut. In addition, Markdown cells can be edited by typically double-clicking the cell to enter edit mode.</p>
 </blockquote>
 
@@ -11850,6 +11851,20 @@ Importing ✓
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Loading-the-Data">Loading the Data<a class="anchor-link" href="#Loading-the-Data">&#182;</a></h2><p>Loading the data and getting information about it.</p>
+<p>Iris data sets has 3 types :</p>
+<ul>
+<li>Setosa</li>
+<li>Versicolour</li>
+<li>Virginica</li>
+</ul>
+<p>And 4 features :</p>
+<ul>
+<li>Sepal Length</li>
+<li>Sepal Width</li>
+<li>Petal Length</li>
+<li>Petal Width.</li>
+</ul>
+<p>and consistes of 150 data points.</p>
 
 </div>
 </div>
@@ -11866,8 +11881,8 @@ Importing ✓
 <span class="n">classes</span>  <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Loading ✓</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data size   : &quot;</span><span class="p">,</span> <span class="n">classes</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Types     : &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span> <span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data size: &quot;</span><span class="p">,</span> <span class="n">classes</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Types    : &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span> <span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Features : &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">))</span>
 </pre></div>
 
@@ -11888,8 +11903,8 @@ Importing ✓
 <pre>
 Loading ✓
 
-Data size   :  150
-Types     :  [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
+Data size:  150
+Types    :  [&#39;setosa&#39; &#39;versicolor&#39; &#39;virginica&#39;]
 Features :  [&#39;sepal length (cm)&#39;, &#39;sepal width (cm)&#39;, &#39;petal length (cm)&#39;, &#39;petal width (cm)&#39;]
 </pre>
 </div>
@@ -11903,7 +11918,8 @@ Features :  [&#39;sepal length (cm)&#39;, &#39;sepal width (cm)&#39;, &#39;petal
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Normalizing-and-Splitting-the-Data">Normalizing and Splitting the Data<a class="anchor-link" href="#Normalizing-and-Splitting-the-Data">&#182;</a></h2><p>To remove any bias that may affect the output.</p>
+<h2 id="Normalizing-and-Splitting-the-Data">Normalizing and Splitting the Data<a class="anchor-link" href="#Normalizing-and-Splitting-the-Data">&#182;</a></h2><p>Normalizing the data is not very important but highly recomended to remove any bias that may affect the output.
+On the other hand splitting the data is very important so that we have 2 training sets and 2 testing sets with 80% of the data in the training set and the remaining 20% of the data in the testing set.</p>
 
 </div>
 </div>
@@ -11919,6 +11935,7 @@ Features :  [&#39;sepal length (cm)&#39;, &#39;sepal width (cm)&#39;, &#39;petal
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Normalizing ✓</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
+<span class="c1"># Splitting the data</span>
 <span class="n">train_set_1</span><span class="p">,</span> <span class="n">test_set_1</span><span class="p">,</span> <span class="n">train_set_2</span><span class="p">,</span> <span class="n">test_set_2</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">normalizer</span><span class="p">,</span> <span class="n">classes</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Splitting ✓</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -11965,7 +11982,8 @@ Splitting ✓
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Linear-SVC">Linear SVC<a class="anchor-link" href="#Linear-SVC">&#182;</a></h3><p>The data is only 150 which is small (in ML world) so using a Linear classifier we run grid search on it.</p>
+<h3 id="Linear-SVC">Linear SVC<a class="anchor-link" href="#Linear-SVC">&#182;</a></h3><p>The data is only 150 which is small (in ML world) so using a Linear classifier we run grid search to get the best value of the C parameter.
+In the output one can see the score of running the algorithm using Linear Classifier on the training sets and on the testing set.</p>
 
 </div>
 </div>
@@ -12027,7 +12045,11 @@ Linear SVC ✓
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Polynomial-Kernel">Polynomial Kernel<a class="anchor-link" href="#Polynomial-Kernel">&#182;</a></h3>
+<h3 id="Polynomial-Kernel">Polynomial Kernel<a class="anchor-link" href="#Polynomial-Kernel">&#182;</a></h3><p>To improve our model's accuracy we use <a href="https://en.wikipedia.org/wiki/Kernel_method">kernels</a>. 
+In machine learning, kernel methods are a class of algorithms for pattern analysis, whose best known member is the support vector machine (SVM). The general task of pattern analysis is to find and study general types of relations (for example clusters, rankings, principal components, correlations, classifications) in datasets. 
+There are several different types of kernels such as gaussian rbf and polynomial poly kernels. 
+In this tutorial we will use Polynomial kernel (but you can use another kernel if you want try in the code block below).</p>
+
 </div>
 </div>
 </div>
@@ -12078,6 +12100,20 @@ Polynomial SVC ✓
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As one can see the training score improves and the test score is 100% (which may be called overfitting but the dataset is small as mentioned above)
+That concludes our tutorial, to know more about SVC you can visit these sites :</p>
+<ul>
+<li><a href="https://www.coursera.org/lecture/machine-learning/optimization-objective-sHfVT">Week 7 in this course</a></li>
+<li><a href="http://scikit-learn.org/stable/index.html">Tutorials from scikit-learn</a></li>
+</ul>
+
+</div>
+</div>
 </div>
     </div>
   </div>
